@@ -1,0 +1,35 @@
+class Solution {
+    public int evalRPN(String[] tokens) {
+        if(tokens.length == 0)    return 0;
+        
+        Stack<Integer> stack = new Stack<>();
+        int num = 0;
+        // beware of order in subtraction and division
+        for(String s: tokens){            
+            if(s.equals("+")){
+                int x = stack.pop();
+                int y = stack.pop();
+                stack.add(x + y);
+            }
+            else if(s.equals("-")){
+                int x = stack.pop();
+                int y = stack.pop();
+                stack.add(y - x);
+            }
+            else if(s.equals("*")){
+                int x = stack.pop();
+                int y = stack.pop();
+                stack.add(x*y);
+            }
+            else if(s.equals("/")){
+                int x = stack.pop();
+                int y = stack.pop();
+                stack.add(y/x);
+            }
+            else{
+                stack.add(Integer.parseInt(s));
+            }
+        }
+        return stack.pop();
+    }
+}
